@@ -1,5 +1,7 @@
 # Chance's Fantastic Steam API App
 
+The live version of this app is hosted [here using Heroku](https://steam-thing.herokuapp.com/).
+
 It just queries the Steam public API right now, lol. BUT it uses some modern web stack stuff like:
 
 * React
@@ -8,6 +10,7 @@ It just queries the Steam public API right now, lol. BUT it uses some modern web
 * Prettier
 * Zod
 * Axios
+* Deployment via Heroku
 
 Additionally, it proves I can do stuff like:
 
@@ -23,6 +26,8 @@ Future goals for the project:
 * more robust traversal of Steam API data
 * nested components that make clever use of state
 * probably refactoring those components to lift the state to where it actually should be
+* add CI via Heroku/GitHub and a test suite (TBD, but I think this project has some default testing tools, so maybe just those)
+* do CD via GitHub branches instead of pushing directly to main like a madman
 * make it not the literal ugliest thing on the internet
 
 If you like what I'm doing, that means a lot to me, thanks. You're always so good at complimenting me in a way that validates my creative output, rather than my intrinsic qualities.
