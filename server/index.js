@@ -1,4 +1,3 @@
-const https = require("https");
 const express = require("express");
 const { default: axios } = require("axios");
 const path = require("path");
