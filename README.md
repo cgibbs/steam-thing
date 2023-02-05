@@ -16,6 +16,8 @@ Additionally, it proves I can do stuff like:
 * Streamline development via careful use of npm and external libraries
 * Work with publicly-available APIs and data to serve up an interactive UI
 * Use componentDidMount to get data once, instead of pulling it a million times because I put it in the render loop by mistake (could happen to anyone, tho)
+* Use Zod more! I want to find more problems that I can solve with this tool
+* Flex some knowledge of the more obscure expressions and operators in the MDN: nullish coalescing operators, spread syntax, optional chaining, async function* expressions for creating anonymous asynchronous generator functions... some of these are probably definitely useful!
 
 Future goals for the project:
 * more robust traversal of Steam API data
