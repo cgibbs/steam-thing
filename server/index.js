@@ -30,7 +30,6 @@ app.get("/steamApps/:limit", (req, res) => {
       "&format=json"
     )
     .then((r) => {
-      console.log(r.data.applist);
       console.log("sending steam apps");
       res.json({ data: r.data.applist.apps });
     });
