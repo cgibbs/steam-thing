@@ -23,6 +23,19 @@ app.get("/steamNews/:limit", (req, res) => {
     });
 });
 
+app.get("/steamApps/:limit", (req, res) => {
+  axios.get(
+      "https://api.steampowered.com/ISteamApps/GetAppList/v2/?count=" +
+      req.params.limit +
+      "&format=json"
+    )
+    .then((r) => {
+      console.log(r.data.applist);
+      console.log("sending steam apps");
+      res.json({ data: r.data.applist.apps });
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
