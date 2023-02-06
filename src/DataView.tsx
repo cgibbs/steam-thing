@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "Axios";
 import z from "zod";
 import ReactLoading from "react-loading";
 import "./DataView.css";
