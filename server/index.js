@@ -1,5 +1,5 @@
 const express = require("express");
-const axios = require("axios");
+const axios = require("Axios");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 
