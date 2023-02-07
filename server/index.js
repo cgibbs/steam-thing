@@ -35,6 +35,17 @@ app.get("/steamApps/:limit", (req, res) => {
     });
 });
 
+app.get("/steamAppInfo/:appID", (req, res) => {
+  console.log("sending steam app info for appID" + req.params.appID);
+  axios.get("http://store.steampowered.com/api/appdetails?appids=" +
+    req.params.appID +
+    "&format=json"
+  ).then((r) => {
+    console.log(r.data);
+    res.json({data: r.data})
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

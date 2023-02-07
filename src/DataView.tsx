@@ -2,10 +2,18 @@ import React from "react";
 import axios from "axios";
 import z from "zod";
 import ReactLoading from "react-loading";
-import "./DataView.css";
+import "./DataView.scss";
+import Modal from "./Component/Modal/index";
 
 type DVProps = {}
-type DVState = { data: [], searchTerm: string, loading: boolean }
+type DVState = { 
+  data: [], 
+  searchTerm: string, 
+  loading: boolean,
+  show: boolean,
+  selectedTitle: string,
+  selectedAppId: string
+}
 
 export default class DataView extends React.Component<DVProps, DVState> {
   constructor(props:any) {
@@ -14,6 +22,9 @@ export default class DataView extends React.Component<DVProps, DVState> {
       data: [],
       searchTerm: "",
       loading: true,
+      show: false,
+      selectedTitle: "",
+      selectedAppId: ""
     };
   }
   
@@ -27,6 +38,17 @@ export default class DataView extends React.Component<DVProps, DVState> {
   handleChange = (event: any) => {
     this.setState({searchTerm: (event.target as HTMLTextAreaElement).value});
   };
+
+  showModal = (e: any) => {
+    console.log(this.state.show);
+    console.log(this.state.selectedAppId);
+    console.log(e.target);
+    this.setState({
+      show: !this.state.show,
+      selectedTitle: !this.state.show ? e.target.text : "",
+      selectedAppId: !this.state.show ? e.target.id : ""
+    });
+  }
 
   render() {
     return (
@@ -52,12 +74,23 @@ export default class DataView extends React.Component<DVProps, DVState> {
                 width={50}
               /> : null
         }
+        <Modal 
+          onClose={this.showModal} 
+          show={this.state.show}
+          selectedTitle={this.state.selectedTitle}
+          selectedAppId={this.state.selectedAppId}>
+            Modal Contents!
+        </Modal>
         <ul>
-          {this.state.data.slice(1,6000)
+          {this.state.data.slice(1,60)
             .filter((d: { appid: Number; name: String }) => d.name.includes(this.state.searchTerm))
             .map((d: { appid: Number; name: String }) => (
-              <li key={z.coerce.string().parse(d.appid)}>{d.name}</li>
-          ))}
+              <li key={z.coerce.string().parse(d.appid)} 
+              id={z.coerce.string().parse(d.appid)}
+              onClick={e => {
+                this.showModal(e);}}
+              >{d.name}</li>
+          ), this)}
         </ul>
       </div>
     );
