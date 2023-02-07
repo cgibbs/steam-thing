@@ -41,7 +41,6 @@ app.get("/steamAppInfo/:appID", (req, res) => {
     req.params.appID +
     "&format=json"
   ).then((r) => {
-    console.log(r);
     res.json({data: r.data})
   });
 });
