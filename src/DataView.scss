@@ -11,3 +11,10 @@ ul {
 .searchBar {
     margin: auto;
 }
+
+.DataViewContainer {
+    height: 80vh;
+    overflow: auto;
+    width: 100%;
+    justify-content: center;
+}

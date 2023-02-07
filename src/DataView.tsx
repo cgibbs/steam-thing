@@ -40,9 +40,15 @@ export default class DataView extends React.Component<DVProps, DVState> {
   };
 
   showModal = (e: any) => {
-    console.log(this.state.show);
-    console.log(this.state.selectedAppId);
-    console.log(e.target);
+    if (this.state.show && e.target.nodeName === "LI") {
+      // user clicked on a list element while modal was open,
+      // force it closed and refresh data on it
+      this.setState({
+        show: false,
+        selectedTitle: "",
+        selectedAppId: "",
+      })
+    }
     this.setState({
       show: !this.state.show,
       selectedTitle: !this.state.show ? e.target.text : "",
@@ -52,11 +58,16 @@ export default class DataView extends React.Component<DVProps, DVState> {
 
   render() {
     return (
-      <div>
+      <div className="DataViewContainer">
         <p>This page pulls down several thousand Steam titles at random 
-          and lets you search across the list of titles.</p>
-        <p>You'll be able to click them to get info about the game soon, 
-          I just haven't done that part yet.</p>
+          and lets you search across the list of titles. You'll be able 
+          to click them to get info about the game soon, 
+          I just haven't done that part yet.
+        </p>
+        <p>Also, please use the Close button in the modal, I'm still
+          trying to find a clever way to close it properly if you click
+          other stuff while it's open.
+        </p>
 
         <input
           className="searchBar"
@@ -82,7 +93,7 @@ export default class DataView extends React.Component<DVProps, DVState> {
             Modal Contents!
         </Modal>
         <ul>
-          {this.state.data.slice(1,6000)
+          {this.state.data.slice(0,600)
             .filter((d: { appid: Number; name: String }) => d.name.includes(this.state.searchTerm))
             .map((d: { appid: Number; name: String }) => (
               <li key={z.coerce.string().parse(d.appid)} 

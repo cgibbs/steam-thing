@@ -2,6 +2,7 @@ import React from "react";
 import "./modal.scss";
 import axios from "axios";
 import ReactLoading from "react-loading";
+import HTMLReactParser from "html-react-parser";
 
 type ModalProps = {
     children: any,
@@ -46,11 +47,9 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
       if(this.props.selectedAppId != "") {
         this.setState({loading:true, startedUpdate: true});
         axios.get("/steamAppInfo/" + this.props.selectedAppId).then((res) => {
-          console.log(res.data.data[this.props.selectedAppId]);
-          console.log(res.data.data[this.props.selectedAppId].data.name);
           this.setState({
-            steamAppTitle: res.data.data[this.props.selectedAppId].data.name,
-            steamAppDescription: res.data.data[this.props.selectedAppId].data.detailed_description, 
+            steamAppTitle: res.data.data[this.props.selectedAppId].data?.name,
+            steamAppDescription: res.data.data[this.props.selectedAppId]?.data?.detailed_description, 
             loading: false});
         })
       }
@@ -62,7 +61,7 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
     }
     return (
         <div className="modal" id="modal">
-          <h2>{this.state.steamAppTitle}</h2>
+          <h2>{this.state.steamAppTitle ?? "No Data"}</h2>
           <div className="content">
           { this.state.loading ? <ReactLoading
                 className="load"
@@ -72,7 +71,7 @@ export default class Modal extends React.Component<ModalProps, ModalState> {
                 width={50}
               /> : null
         }
-            {this.state.steamAppDescription}
+            {HTMLReactParser(this.state.steamAppDescription ?? "No Data")}
           </div>
           <div className="actions">
             <button className="toggle-button" onClick={this.onClose}>
