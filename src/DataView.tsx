@@ -82,7 +82,7 @@ export default class DataView extends React.Component<DVProps, DVState> {
             Modal Contents!
         </Modal>
         <ul>
-          {this.state.data.slice(1,60)
+          {this.state.data.slice(1,6000)
             .filter((d: { appid: Number; name: String }) => d.name.includes(this.state.searchTerm))
             .map((d: { appid: Number; name: String }) => (
               <li key={z.coerce.string().parse(d.appid)} 
